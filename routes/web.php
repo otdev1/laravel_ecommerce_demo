@@ -37,4 +37,6 @@ Auth::routes();
 
 /*line below works because use App\Http\Controllers\HomeController; is declared*/
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('home');
+//Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');

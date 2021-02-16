@@ -59,6 +59,14 @@
 
 
                     <div class="products text-center">
+                        @foreach ($products as $product)
+                            <div class="product">
+                                <!-- <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ productImage($product->image) }}" alt="product"></a> -->
+                                <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
+                                <a href="#"><div class="product-name">{{ $product->name }}</div></a>
+                                <div class="product-name">{{ $product->price }}</div>
+                            </div>
+                        @endforeach
                         <div class="product">
                             <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
                             <a href="#"><div class="product-name">MacBook Pro</div></a>
