@@ -16,7 +16,7 @@ class LandingPageController extends Controller
     {
         $products = Product::inRandomOrder()->take(8)->get(); //get 8 products in random order
 
-        return view('landing-page')->with('products', $products);
+        return view('landing-page')->with('products', $products); //allows $products variable to accessed in this view
     }
 
 }

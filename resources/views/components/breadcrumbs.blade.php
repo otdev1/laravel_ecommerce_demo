@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
     <div class="breadcrumbs-container container">
         <div>
-            {{ $slot }}
+            {{$slot}}
         </div>
         <div>
             @include('partials.search')

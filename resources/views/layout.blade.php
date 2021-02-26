@@ -25,11 +25,11 @@
 
 
 <body class="@yield('body-class', '')">
-    @include('partials.nav')
+    {{--@include('partials.nav')--}}
 
     @yield('content')
 
-    @include('partials.footer')
+    {{--@include('partials.footer')--}}
 
     @yield('extra-js')
 

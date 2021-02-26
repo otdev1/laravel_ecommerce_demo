@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\LandingPageController;
 
+use App\Http\Controllers\ShopController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,3 +44,9 @@ Auth::routes();
 //Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
+
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+
+Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
+
+//Route::view('/shop', 'shop'); //show the view called shop for the /shop route

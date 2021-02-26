@@ -61,12 +61,15 @@
                     <div class="products text-center">
                         @foreach ($products as $product)
                             <div class="product">
-                                <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
+                                <a href="#"><img src="images/macbook-pro.png" alt="product"></a>
+                                <!--<a href="#"><div class="product-name">{{--$product->name--}}</div></a>-->
                                 <a href="#"><div class="product-name">{{ $product->name }}</div></a>
-                                <div class="product-name">{{ $product->price }}</div>
+                                <!--<div class="product-price">{{--$product->price--}}</div>-->
+                                <div class="product-name">{{$product->presentPrice()}}</div>
+                                <!--see product.php for definition of presetprice()-->
                             </div>
                         @endforeach
-                        <div class="product">
+                        <!-- <div class="product">
                             <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
                             <a href="#"><div class="product-name">MacBook Pro</div></a>
                             <div class="product-price">$2499.99</div>
@@ -105,7 +108,7 @@
                             <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
                             <a href="#"><div class="product-name">MacBook Pro</div></a>
                             <div class="product-price">$2499.99</div>
-                        </div>
+                        </div> -->
                     </div> <!-- end products -->
 
                     <div class="text-center button-container">
