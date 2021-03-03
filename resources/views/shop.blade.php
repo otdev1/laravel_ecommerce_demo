@@ -8,11 +8,14 @@
 
 @section('content')
 
-    {{--@component('components.breadcrumbs')
+    @component('components.breadcrumbs')
         <a href="/">Home</a>
         <i class="fa fa-chevron-right breadcrumb-separator"></i>
+        {{--<span><a href="/shop">Shop</a></span>
+            <span><a href="{{ route('shop.index') }}">Shop</a></span>
+        --}}
         <span>Shop</span>
-    @endcomponent--}}
+    @endcomponent {{--see https://laravel.com/docs/8.x/blade#components--}}
 
     <div class="container">
         @if (session()->has('success_message'))
@@ -55,9 +58,9 @@
             <div class="products text-center">
                 @foreach ($products as $product)
                     <div class="product">
-                        <a href="#"><img src="images/macbook-pro.png" alt="product"></a>
+                        <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('images/products/'.$product->slug.'.jpg') }}" alt="product"></a>
                         <!--<a href="#"><div class="product-name">{{--$product->name--}}</div></a>-->
-                        <a href="#"><div class="product-name">{{ $product->name }}</div></a>
+                        <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
                         <!--<div class="product-price">{{--$product->price--}}</div>-->
                         <div class="product-name">{{$product->presentPrice()}}</div>
                         <!--see product.php for definition of presetprice()-->

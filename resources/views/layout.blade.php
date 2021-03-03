@@ -26,6 +26,8 @@
 
 <body class="@yield('body-class', '')">
     {{--@include('partials.nav')--}}
+    
+    @include('partials.customnav')
 
     @yield('content')
 

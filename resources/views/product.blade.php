@@ -8,28 +8,29 @@
 
 @section('content')
 
-    <div class="breadcrumbs">
+    <!--<div class="breadcrumbs">
         <div class="breadcrumbs-container container">
             <div>
                 <a href="/">Home</a>
                 <i class="fa fa-chevron-right breadcrumb-separator"></i>
-                <span><a href="/shop">Shop</a></span>
+                {{--<span><a href="/shop">Shop</a></span>--}}
+                <span><a href="{{ route('shop.index') }}">Shop</a></span>
                 <i class="fa fa-chevron-right breadcrumb-separator"></i>
-                <span>{{ $product->name }}</span>
+                <span>{{--$product->name--}}</span>
             </div>
             <div>
                 {{--@include('partials.search')--}}
             </div>
         </div>
-    </div>
+    </div>-->
 
-    {{--@component('components.breadcrumbs')
+    @component('components.breadcrumbs')
         <a href="/">Home</a>
         <i class="fa fa-chevron-right breadcrumb-separator"></i>
         <span><a href="/shop">Shop</a></span>
         <i class="fa fa-chevron-right breadcrumb-separator"></i>
         <span>{{ $product->name }}</span>
-    @endcomponent--}}
+    @endcomponent {{--see https://laravel.com/docs/8.x/blade#components--}}
 
     <div class="container">
         @if (session()->has('success_message'))
@@ -52,7 +53,8 @@
     <div class="product-section container">
         <div>
             <div class="product-section-image">
-                <img src="" alt="product" class="active" id="currentImage">
+                <img src="{{ asset('images/products/'.$product->slug.'.jpg') }}" alt="product" class="active" id="currentImage">
+                <!--the slug and the image name of each product is the same-->
             </div>
             <div class="product-section-images">
                 <div class="product-section-thumbnail selected">
@@ -90,6 +92,8 @@
     </div> <!-- end product-section -->
 
     {{--@include('partials.might-like')--}}
+
+    @include('partials.custom-might-like')
 
 @endsection
 

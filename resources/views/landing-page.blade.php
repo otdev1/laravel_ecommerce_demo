@@ -22,7 +22,7 @@
                 <div class="top-nav container">
                     <div class="logo">CSS Grid Example</div>
                     <ul>
-                        <li><a href="#">Shop</a></li>
+                        <li><a href="{{ route('shop.index') }}">Shop</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">Cart</a></li>
@@ -61,9 +61,11 @@
                     <div class="products text-center">
                         @foreach ($products as $product)
                             <div class="product">
-                                <a href="#"><img src="images/macbook-pro.png" alt="product"></a>
+                                {{--<a href="{{ route('shop.show', $product->slug) }}"><img src="images/macbook-pro.png" alt="product"></a>--}}
+                                <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('images/products/'.$product->slug.'.jpg') }}" alt="product"></a>
+                                <!--the slug and the image name of each product is the same-->
                                 <!--<a href="#"><div class="product-name">{{--$product->name--}}</div></a>-->
-                                <a href="#"><div class="product-name">{{ $product->name }}</div></a>
+                                <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
                                 <!--<div class="product-price">{{--$product->price--}}</div>-->
                                 <div class="product-name">{{$product->presentPrice()}}</div>
                                 <!--see product.php for definition of presetprice()-->
@@ -112,7 +114,7 @@
                     </div> <!-- end products -->
 
                     <div class="text-center button-container">
-                        <a href="#" class="button">View more products</a>
+                        <a href="{{ route('shop.index') }}" class="button">View more products</a>
                     </div>
 
                 </div> <!-- end container -->

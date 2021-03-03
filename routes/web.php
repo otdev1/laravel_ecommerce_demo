@@ -45,7 +45,7 @@ Auth::routes();
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
 
