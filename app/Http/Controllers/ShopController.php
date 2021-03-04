@@ -29,7 +29,10 @@ class ShopController extends Controller
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 
-        $mightAlsoLike = Product::where('slug', '!=', $slug)->inRandomOrder()->take(4)->get();
+        //$mightAlsoLike = Product::where('slug', '!=', $slug)->inRandomOrder()->take(4)->get();
+
+        $mightAlsoLike = Product::where('slug', '!=', $slug)->mightAlsoLike()->get();
+        //mightAlsoLike is a local scope of the product model see product.php
 
         //return view('product')->with('product', $product);
         return view('product')->with([

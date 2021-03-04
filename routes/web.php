@@ -8,6 +8,8 @@ use App\Http\Controllers\LandingPageController;
 
 use App\Http\Controllers\ShopController;
 
+use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,5 +50,7 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route

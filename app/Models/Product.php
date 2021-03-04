@@ -24,4 +24,13 @@ class Product extends Model
           return '$' . number_format($this->price, 2);
     }
 
+    /*this function is a local scope 
+      Local scopes allow you to define common sets of query constraints 
+      in this case inRandomOrder that you may easily re-use throughout your application.
+      see https://laravel.com/docs/8.x/eloquent#query-scopes */
+    public function scopeMightAlsoLike($query)
+    {
+        return $query->inRandomOrder()->take(4);
+    }
+
 }
