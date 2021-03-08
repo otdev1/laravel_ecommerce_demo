@@ -84,10 +84,31 @@
 
             {{--@if ($product->quantity > 0)
                 <form action="{{ route('cart.store', $product) }}" method="POST">
-                    {{ csrf_field() }}
+                    {{ csrf_field() is deprecated }}
+                    @csrf
                     <button type="submit" class="button button-plain">Add to Cart</button>
                 </form>
             @endif--}}
+            
+            <!--form element must be used instead of anchor element since cart.store 
+                is a post route see web.php-->
+            {{--<form action="{{ route('cart.store') }}" method="POST">
+                    {{csrf_field() is deprecated}}
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
+                    <input type="hidden" name="name" value="{{ $product->name }}">
+                    <input type="hidden" name="price" value="{{ $product->price }}">
+                    <button type="submit" class="button button-plain">Add to Cart</button>
+            </form>--}}
+            
+            <!--form element must be used instead of anchor element since cart.store 
+                is a post route see web.php-->
+            <form action="{{ route('cart.store', $product) }}" method="POST">
+                    {{--csrf_field() is deprecated--}}
+                    @csrf
+                    <button type="submit" class="button button-plain">Add to Cart</button>
+            </form>   
+
         </div>
     </div> <!-- end product-section -->
 

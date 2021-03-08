@@ -10,6 +10,8 @@ use App\Http\Controllers\ShopController;
 
 use App\Http\Controllers\CartController;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,5 +54,14 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
+
+Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy'); 
+//remove product from cart
+
+Route::get('empty', function() {
+  Cart::destroy();
+});
 
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -38,10 +39,31 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Product $product)
     {
-        //
+        Cart::add($product->id, $product->name, 1, $product->price)
+            ->associate('App\Models\Product');
+        // Cart::add($request->id, $request->name, 1, $request->price)
+        //     ->associate('App\Product');
+        //add(productid, productname, productquantity, productprice, productweight)
+        /*associate enables easier retrieval of the product model e.g $item->model->*field_of_product_model*
+          in other sectons/files throughout the application see cart.blade.php and Product.php*/
+
+        return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
     }
+    /*public function store(Request $request)
+    {
+        Cart::add($product->id, $product->name, 1, $product->price)
+            ->associate('App\Product');
+        // Cart::add($request->id, $request->name, 1, $request->price)
+        //     ->associate('App\Product');
+        //add(productid, productname, productquantity, productprice)
+        associate enables easier retrieval of the product model e.g $item->model->*field_of_product_model*
+          in other sectons/files throughout the application see cart.blade.php and Product.php
+
+        return redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!');
+    }*/
+    
 
     /**
      * Display the specified resource.
@@ -85,6 +107,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::remove($id);
+
+        return back()->with('success_message', 'Item has been removed!');
     }
 }

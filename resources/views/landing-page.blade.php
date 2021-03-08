@@ -25,7 +25,13 @@
                         <li><a href="{{ route('shop.index') }}">Shop</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="{{ route('cart.index') }}">Cart</a></li>
+                        <li><a href="{{ route('cart.index') }}">Cart 
+                                @if( Cart::instance('default')->count() > 0 ) 
+                                    <!--show cart item count badge if cart is unempty -->
+                                    <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
+                                @endif
+                            </a>
+                        </li>
                     </ul>
                 </div> <!-- end top-nav -->
 
