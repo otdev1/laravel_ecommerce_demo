@@ -16,6 +16,7 @@ class CartController extends Controller
     public function index()
     {
         //$mightAlsoLike = Product::inRandomOrder()->take(4)->get();
+        //dd(Cart::content()); 
 
         $mightAlsoLike = Product::mightAlsoLike()->get();
         //mightAlsoLike is a local scope of the product model see product.php
@@ -41,6 +42,14 @@ class CartController extends Controller
      */
     public function store(Product $product)
     {
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($product) {
+            return $cartItem->id === $product->id;
+        }); //$product is the current object to be checked 
+
+        if ($duplicates->isNotEmpty()) {
+            return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
+        }
+
         Cart::add($product->id, $product->name, 1, $product->price)
             ->associate('App\Models\Product');
         // Cart::add($request->id, $request->name, 1, $request->price)
@@ -111,4 +120,34 @@ class CartController extends Controller
 
         return back()->with('success_message', 'Item has been removed!');
     }
+
+    /**
+     * Switch item for shopping cart to Save for Later.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function switchToSaveForLater($id)
+    {
+        $item = Cart::get($id); //retrieve item with id of $id
+
+        Cart::remove($id); //remove item with id of $id from default instance of cart object
+
+        $duplicates = Cart::instance('saveForLater')->search(function ($cartItem, $rowId) use ($id) {
+            return $rowId === $id;
+        });
+        /*saveForLater is another instance of the cart object, the 'default' is the default instance of the cart
+          object see customnav.blade.php
+          */
+
+        if ($duplicates->isNotEmpty()) {
+            return redirect()->route('cart.index')->with('success_message', 'Item is already Saved For Later!');
+        }
+
+        Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
+            ->associate('App\Models\Product');
+
+        return redirect()->route('cart.index')->with('success_message', 'Item has been Saved For Later!');
+    }
+
 }

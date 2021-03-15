@@ -10,6 +10,8 @@ use App\Http\Controllers\ShopController;
 
 use App\Http\Controllers\CartController;
 
+use App\Http\Controllers\SaveForLaterController;
+
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 /*
@@ -60,8 +62,14 @@ Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.sto
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy'); 
 //remove product from cart
 
+Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'switchToSaveForLater'])->name('cart.switchToSaveForLater');
+
+Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLater.destroy');
+Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'] )->name('saveForLater.switchToCart');
+
+
 Route::get('empty', function() {
-  Cart::destroy();
+  Cart::instance('saveForLater')->destroy();
 });
 
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route

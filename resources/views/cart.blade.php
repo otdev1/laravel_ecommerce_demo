@@ -58,8 +58,8 @@
                                         @csrf
                                         <button type="submit" class="cart-options">Remove</button>
                                     </form>
-                                    <form action="#" method="POST">
-                                    
+                                    <form action="{{ route('cart.switchToSaveForLater', $item->rowId) }}" method="POST">
+                                        @csrf
                                         <button type="submit" class="cart-options">Save for Later</button>
                                     </form>
                                 </div>
@@ -79,39 +79,6 @@
 
                     @endforeach
 
-                    <!--<div class="cart-table-row">
-                        <div class="cart-table-row-left">
-                            <a href="https://laravelecommerceexample.ca/shop/phone-8"><img src="https://laravelecommerceexample.ca/storage/products/dummy/phone-8.jpg" alt="item" class="cart-table-img"></a>
-                            <div class="cart-item-details">
-                                <div class="cart-table-item"><a href="https://laravelecommerceexample.ca/shop/phone-8">Phone 8</a></div>
-                                <div class="cart-table-description">16GB, 5.8 inch screen, 4GHz Quad Core</div>
-                            </div>
-                        </div>
-                        <div class="cart-table-row-right">
-                            <div class="cart-table-actions">
-                                <form action="https://laravelecommerceexample.ca/cart/a7344b0686757682845e6325440cbc15" method="POST">
-                                <input type="hidden" name="_token" value="mgi9K8sy5HNLzxHcD88SLTGtl1LBWtsbKxnUElAW">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="cart-options">Remove</button>
-                                </form>
-                                <form action="https://laravelecommerceexample.ca/cart/switchToSaveForLater/a7344b0686757682845e6325440cbc15" method="POST">
-                                <input type="hidden" name="_token" value="mgi9K8sy5HNLzxHcD88SLTGtl1LBWtsbKxnUElAW">
-                                <button type="submit" class="cart-options">Save for Later</button>
-                                </form>
-                            </div>
-                            <div>
-                                <select class="quantity" data-id="a7344b0686757682845e6325440cbc15" data-productQuantity="10">
-                                <option selected>1</option>
-                                <option >2</option>
-                                <option >3</option>
-                                <option >4</option>
-                                <option >5</option>
-                                </select>
-                            </div>
-                            <div>$826.67</div>
-                        </div>
-                    </div>-->
-                    <!-- end cart-table-row -->
                 </div>
                 <!-- end cart-table -->
                 <a href="#" class="have-code">Have a Code?</a>
@@ -125,7 +92,8 @@
                 <!-- end have-code-container -->
                 <div class="cart-totals">
                 <div class="cart-totals-left">
-                    Shipping is free because we’re awesome like that. Also because that’s additional stuff I don’t feel like figuring out :).
+                    {{--Shipping is free because we’re awesome like that. Also because that’s additional stuff I don’t feel like figuring out :).--}}
+                    Shipping Fee:   n/a
                 </div>
                 <div class="cart-totals-right">
                     <div>
@@ -134,18 +102,17 @@
                         <span class="cart-totals-total">Total</span>
                     </div>
                     <div class="cart-totals-subtotal">
-                        $826.67 <br>
-                        $107.47 <br>
-                        <span class="cart-totals-total">$934.14</span>
+                        {{ presentPrice(Cart::subtotal()) }} <br>
+                        {{ presentPrice(Cart::tax()) }}<br>
+                        <span class="cart-totals-total">{{ presentPrice(Cart::total()) }}</span>
                     </div>
                 </div>
                 </div>
                 <!-- end cart-totals -->
                 <div class="cart-buttons">
-                <a href="https://laravelecommerceexample.ca/shop" class="button">Continue Shopping</a>
-                <a href="https://laravelecommerceexample.ca/checkout" class="button-primary">Proceed to Checkout</a>
+                    <a href="https://laravelecommerceexample.ca/shop" class="button">Continue Shopping</a>
+                    <a href="https://laravelecommerceexample.ca/checkout" class="button-primary">Proceed to Checkout</a>
                 </div>
-                <h3>You have no items Saved for Later.</h3>
 
             @else
 
@@ -154,6 +121,49 @@
                 <div class="spacer"></div>
                 <a href="{{ route('shop.index') }}" class="button">Continue Shopping</a>
                 <div class="spacer"></div>
+
+            @endif
+
+            @if (Cart::instance('saveForLater')->count() > 0)
+
+                <h2>{{ Cart::instance('saveForLater')->count() }} item(s) Saved For Later</h2>
+
+                <div class="saved-for-later cart-table">
+                    @foreach (Cart::instance('saveForLater')->content() as $item)
+                        <div class="cart-table-row">
+                            <div class="cart-table-row-left">
+                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
+                                <div class="cart-item-details">
+                                    <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
+                                    <div class="cart-table-description">{{ $item->model->details }}</div>
+                                </div>
+                            </div>
+                            <div class="cart-table-row-right">
+                                <div class="cart-table-actions">
+                                    <form action="{{ route('saveForLater.destroy', $item->rowId) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="cart-options">Remove</button>
+                                    </form>
+
+                                    <form action="{{ route('saveForLater.switchToCart', $item->rowId) }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit" class="cart-options">Move to Cart</button>
+                                    </form>
+                                </div>
+
+                                <div>{{ $item->model->presentPrice() }}</div>
+                            </div>
+                        </div> <!-- end cart-table-row -->
+                    @endforeach
+
+                </div> <!-- end saved-for-later -->
+
+            @else
+
+                <h3>You have no items Saved for Later.</h3>
 
             @endif
 

@@ -24,7 +24,8 @@ return [
     |
     */
 
-    'tax' => 21,
+    // 'tax' => 21,
+    'tax' => 13,
 
     /*
     |--------------------------------------------------------------------------
@@ -72,7 +73,8 @@ return [
 
         'decimal_point' => '.',
 
-        'thousand_separator' => ',',
+        // 'thousand_separator' => ',',
+        'thousand_separator' => '',
 
     ],
 
