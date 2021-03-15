@@ -178,34 +178,61 @@
 
 @endsection
 
-@section('extra-js')
-    <script src="{{ asset('js/app.js') }}"></script>
+{{--@section('extra-js')--}}
+    <!--<script src="{{ asset('js/app.js') }}"> /*load app.js from public folder */
+        /*invoking function*/-->
+@push('scripts')
+{{--see 
+    stack directive in layout.blade.pohp
+    https://laravel.com/docs/5.8/blade#stacks 
+    https://stackoverflow.com/questions/55963663/laravel-custom-javascript-on-blade-is-not-working/55963744
+--}}
     <script>
         (function(){
-            const classname = document.querySelectorAll('.quantity')
+            const classname = document.querySelectorAll('.quantity') 
+            /*classname is a node list*/
 
-            Array.from(classname).forEach(function(element) {
+            /*Array.from(classname).forEach(function(element)*/ 
+            document.querySelectorAll(".quantity").forEach(function (element){
+                /*array.from() which is an ES6 function is used to convert classname to an array*/
                 element.addEventListener('change', function() {
-                    const id = element.getAttribute('data-id')
-                    const productQuantity = element.getAttribute('data-productQuantity')
+                    // const id = element.getAttribute('data-id')
+                    // const productQuantity = element.getAttribute('data-productQuantity')
 
-                    axios.patch(`/cart/${id}`, {
-                        quantity: this.value,
-                        productQuantity: productQuantity
+                    // axios.patch(`/cart/${id}`, {
+                    //     quantity: this.value,
+                    //     productQuantity: productQuantity
+                    // })
+                    // .then(function (response) {
+                    //     // console.log(response);
+                    //     window.location.href = '{{ route('cart.index') }}'
+                    // })
+                    // .catch(function (error) {
+                    //     // console.log(error);
+                    //     window.location.href = '{{ route('cart.index') }}'
+                    // });
+
+                    axios.patch('/cart/5', {
+                        quantity: 3
                     })
                     .then(function (response) {
-                        // console.log(response);
-                        window.location.href = '{{ route('cart.index') }}'
+                        console.log(response);
+                        //window.location.href = '{{ route('cart.index') }}'
                     })
                     .catch(function (error) {
-                        // console.log(error);
-                        window.location.href = '{{ route('cart.index') }}'
+                        console.log(error.response);
+                        //window.location.href = '{{ route('cart.index') }}'
                     });
+                    //alert('changed');
                 })
             })
-        })();
-    </script>
 
+        })();
+    
+    </script>
+@endpush
+
+@section('extra-js')
     <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>

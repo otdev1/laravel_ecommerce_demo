@@ -51,20 +51,28 @@ Auth::routes();
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 
+//Shop routes
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
 
+
+//Cart Routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 
+Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
+
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy'); 
 //remove product from cart
 
+
+//SaveForLater Routes
 Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'switchToSaveForLater'])->name('cart.switchToSaveForLater');
 
 Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destroy'])->name('saveForLater.destroy');
+
 Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'] )->name('saveForLater.switchToCart');
 
 

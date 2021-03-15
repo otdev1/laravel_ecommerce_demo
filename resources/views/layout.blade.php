@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
         @yield('extra-css')
     </head>
 
@@ -33,7 +35,15 @@
 
     {{--@include('partials.footer')--}}
 
+    @stack('scripts') 
+    {{--see 
+            push directive in cart.blade.php
+            https://laravel.com/docs/5.8/blade#stacks 
+            https://stackoverflow.com/questions/55963663/laravel-custom-javascript-on-blade-is-not-working/55963744
+    --}}
+
     @yield('extra-js')
+
 
 </body>
 </html>
