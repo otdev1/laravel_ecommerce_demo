@@ -64,15 +64,20 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <select class="quantity" data-id="a7344b0686757682845e6325440cbc15" data-productQuantity="10">
-                                    <option selected>1</option>
-                                    <option >2</option>
-                                    <option >3</option>
-                                    <option >4</option>
-                                    <option >5</option>
+                                    <select class="quantity" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
+                                        @for ($i = 1; $i < 6 ; $i++)
+                                            <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor <!--show current quantity value in select box for a specific item-->
+                                        {{--
+                                            <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
+                                            <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
+                                            <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
+                                            <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
+                                            <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
+                                        --}}
                                     </select>
                                 </div>
-                                <div>{{ $item->model->presentPrice() }}</div>
+                                <div>{{ presentPrice($item->subtotal) }}</div>
                             </div>
                         </div>
                         <!-- end cart-table-row -->
@@ -196,7 +201,7 @@
             document.querySelectorAll(".quantity").forEach(function (element){
                 /*array.from() which is an ES6 function is used to convert classname to an array*/
                 element.addEventListener('change', function() {
-                    // const id = element.getAttribute('data-id')
+                    const id = element.getAttribute('data-id') //see select element
                     // const productQuantity = element.getAttribute('data-productQuantity')
 
                     // axios.patch(`/cart/${id}`, {
@@ -212,16 +217,16 @@
                     //     window.location.href = '{{ route('cart.index') }}'
                     // });
 
-                    axios.patch('/cart/5', {
-                        quantity: 3
+                    axios.patch(`/cart/${id}`, {
+                        quantity: this.value //get the quantity of the current row item with an id of id
                     })
                     .then(function (response) {
-                        console.log(response);
-                        //window.location.href = '{{ route('cart.index') }}'
+                        //console.log(response);
+                        window.location.href = '{{ route('cart.index') }}' //reload cart page after product quantity is changed
                     })
                     .catch(function (error) {
-                        console.log(error.response);
-                        //window.location.href = '{{ route('cart.index') }}'
+                        //console.log(error.response);
+                        window.location.href = '{{ route('cart.index') }}'
                     });
                     //alert('changed');
                 })
