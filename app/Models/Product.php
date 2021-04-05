@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory; //see productfactory.php for fields associated with the product model
+    //use HasFactory; //see productfactory.php for fields associated with the product model
 
     // public function asDollars($value) {
     //     if ($value<0) return "-".asDollars(-$value);
@@ -26,11 +26,17 @@ class Product extends Model
 
     /*this function is a local scope 
       Local scopes allow you to define common sets of query constraints 
-      in this case inRandomOrder that you may easily re-use throughout your application.
+      ,in this case inRandomOrder, that you may easily re-use throughout your application.
       see https://laravel.com/docs/8.x/eloquent#query-scopes */
     public function scopeMightAlsoLike($query)
     {
         return $query->inRandomOrder()->take(4);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category');
+        //see https://laravel.com/docs/8.x/eloquent-relationships
     }
 
 }
