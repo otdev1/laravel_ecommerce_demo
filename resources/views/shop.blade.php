@@ -84,7 +84,12 @@
             </div> <!-- end products -->
 
             <div class="spacer"></div>
-            {{--$products->appends(request()->input())->links()--}}
+            {{ $products->appends(request()->input())->links() }}
+            {{--appends queries e.g localhost:0000/shop?sort=low_high to each page link so that filters on category, price etc is preserved
+                when navigating between different pages--}}
+
+            {{--$products->links()--}}
+
         </div>
     </div>
 
