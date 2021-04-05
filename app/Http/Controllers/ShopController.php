@@ -17,15 +17,51 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::inRandomOrder()->take(10)->get(); //get 8 products in random order
+        /*check if there is a query string i.e category=category_name in the URL of the request
+          and filters products based on the category*/
+        if(request()->category) 
+        {
+            $products = Product::with('categories')
+                                 ->whereHas('categories', function ($query) {
+                                             $query->where('slug', request()->category); 
+                                 })->get();
+            
+            $categories = Category::all();
 
-        $categories = Category::all();
+            $categoryName = $categories->where('slug', request()->category)->first()->name;
+                            /*get the name of the first category from the collection of categories */
+
+        }
+        else
+        {
+            $products = Product::inRandomOrder()->take(10)->get(); //get 8 products in random order
+
+            $categories = Category::all();
+
+            $categoryName = 'Featured';
+        }
+        
+        // $products = Product::inRandomOrder()->take(10)->get(); //get 8 products in random order
+
+        // $categories = Category::all();
+
+        if (request()->sort == 'low_high') {
+            // $products = $products->orderBy('price')->paginate($pagination);
+            $products = $products->sortBy('price'); //sortBy fucntion sorts in ascending order i.e low to high
+        } elseif (request()->sort == 'high_low') {
+            //$products = $products->orderBy('price', 'desc')->paginate($pagination);
+            $products = $products->sortByDesc('price');
+        } 
+        // else {
+        //     $products = $products->paginate($pagination);
+        // }
 
         //return view('shop')->with('products', $products); //allows $products variable to be accessed in the shop view
         return view('shop')->with([
             'products' => $products,
             'categories' => $categories,
-        ]); //allows $products and $categories variables to be accessed in the shop view
+            'categoryName' => $categoryName,
+        ]); //allows $products, $categories, and $categoryName variables to be accessed in the shop view
     }
 
     /**
