@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Category extends Model
 {
     use HasFactory;
+
+    protected $table = 'category'; //used to prevent conflict with categories table belonging to voyager
 
     public function products()
     {

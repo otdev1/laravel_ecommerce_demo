@@ -66,7 +66,9 @@ class ShopController extends Controller
             //$products = Product::inRandomOrder()->take(12)->paginate(9); 
 
             // $products = Product::inRandomOrder()->take(12); 
-            $products = Product::take(12); 
+            //$products = Product::take(12); 
+
+            $products = Product::where('featured', true);
             /*returns a query result as a stdClass object 
              see https://laravel.com/docs/8.x/queries#running-database-queries
              see https://www.geeksforgeeks.org/what-is-stdclass-in-php/#:~:text=The%20stdClass%20is%20the%20empty,object%2C%20it%20is%20not%20modified.*/

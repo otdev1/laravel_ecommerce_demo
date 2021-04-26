@@ -41,8 +41,9 @@
             <ul>
                 @foreach ($categories as $category)
                     {{--<li class="{{ setActiveCategory($category->slug) }}"><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>--}}
-                    <li><a href="{{ route( 'shop.index', ['category' => $category->slug] ) }}">{{ $category->name }}</a></li>
-                                 {{--add a query to the link for a specific category e.g http://localhost:0000/shop?category=category_name--}}
+                    <li class="{{ setActiveCategory($category->slug) }}" ><a href="{{ route( 'shop.index', ['category' => $category->slug] ) }}">{{ $category->name }}</a></li>
+                               {{--setActiveCategory defined in helpers.php, add a query to the link for a specific category e.g http://localhost:0000/shop?category=category_name--}}
+
                 @endforeach
             </ul>
         </div> <!-- end sidebar -->

@@ -81,3 +81,8 @@ Route::get('empty', function() {
 });
 
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
