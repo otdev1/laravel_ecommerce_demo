@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>CSS Grid Example</title>
+        <title>Laravel Ecommerce Demo</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:300,400,700" rel="stylesheet">
@@ -20,25 +20,36 @@
         <div id="app">
             <header class="with-background">
                 <div class="top-nav container">
-                    <div class="logo">CSS Grid Example</div>
-                    <ul>
-                        <li><a href="{{ route('shop.index') }}">Shop</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="{{ route('cart.index') }}">Cart 
-                                @if( Cart::instance('default')->count() > 0 ) 
-                                    <!--show cart item count badge if cart is unempty -->
-                                    <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
-                                @endif
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="logo">Laravel Ecommerce Demo</div>
+                    {{ menu('main', 'partials.menus.v-main') }}
+                    {{-- the menu is referenced as main such that it is configurable in voyager as this reference 
+                        see - http://127.0.0.1:8000/admin/menus/2/builder 
+                        the template for this menu is defined in views/partials/menus/v-main
+                        see https://voyager-docs.devdojo.com/core-concepts/menus-and-menu-builder 
+                    --}}
+
+                    {{--<ul>
+                            <li><a href="{{ route('shop.index') }}">Shop</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="{{ route('cart.index') }}">Cart 
+                                    @if( Cart::instance('default')->count() > 0 ) 
+                                        <!--show cart item count badge if cart is unempty -->
+                                        <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
+                                    @endif
+                                </a>
+                            </li>
+                        </ul>--}}
                 </div> <!-- end top-nav -->
 
                 <div class="hero container">
                     <div class="hero-copy">
                         <h1>CSS Grid Example</h1>
                         <p>A practical example of using CSS Grid for a typical website layout.</p>
+                        
+                        {{-- menu('main') --}}
+                        {{--output menu created in voyager see - http://127.0.0.1:8000/admin/menus/2/builder --}}
+                        
                         <div class="hero-buttons">
                             <a href="#" class="button button-white">Button 1</a>
                             <a href="#" class="button button-white">Button 2</a>
@@ -77,46 +88,6 @@
                                 <!--see product.php for definition of presetprice()-->
                             </div>
                         @endforeach
-                        <!-- <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div>
-                        <div class="product">
-                            <a href="#"><img src="img/macbook-pro.png" alt="product"></a>
-                            <a href="#"><div class="product-name">MacBook Pro</div></a>
-                            <div class="product-price">$2499.99</div>
-                        </div> -->
                     </div> <!-- end products -->
 
                     <div class="text-center button-container">
@@ -155,7 +126,18 @@
 
             <footer>
                 <div class="footer-content container">
+                <div>This e-commerce website was created for demonstration purposes only. Its UI was created by Andre Madarang for more information visit: 
+                <a href="https://bit.ly/3e7vWQs" target="_blank">https://bit.ly/3e7vWQs</a> </div>
+                    {{-- menu('footer', 'partials.menus.v-footer') --}}
+                    {{-- the menu is referenced as footer such that it is configurable in voyager as this reference 
+                        see - http://127.0.0.1:8000/admin/menus/3/builder 
+                        the template for this menu is defined in views/partials/menus/v-main
+                        see https://voyager-docs.devdojo.com/core-concepts/menus-and-menu-builder 
+                    --}}
+                </div>
+                {{-- <div class="footer-content container">
                     <div class="made-with">Made with <i class="fa fa-heart"></i> by Andre Madarang</div>
+                    <div>This UI was created by Andre Madarang</div>
                     <ul>
                         <li>Follow Me:</li>
                         <li><a href="#"><i class="fa fa-globe"></i></a></li>
@@ -163,7 +145,7 @@
                         <li><a href="#"><i class="fa fa-github"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     </ul>
-                </div> <!-- end footer-content -->
+                </div> <!-- end footer-content --> --}}
             </footer>
         </div>
     </body>

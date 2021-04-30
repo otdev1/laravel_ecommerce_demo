@@ -77,7 +77,9 @@
             <div class="product-section-price">{{ $product->presentPrice() }}</div>
 
             <p>
-                {{ $product->description }}
+                {{-- $product->description --}}
+                {!! $product->description !!}
+                {{-- see https://laravel.com/docs/8.x/blade#displaying-unescaped-data --}}
             </p>
 
             <p>&nbsp;</p>
