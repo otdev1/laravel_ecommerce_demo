@@ -38,12 +38,13 @@
 
                 <div class="cart-table">
                     @foreach (Cart::content() as $item)
-
+                    
                         <div class="cart-table-row">
                             <div class="cart-table-row-left"> 
                                 <!--the item object has a model property, the model in this case is Product which has been assocaited with 
                                     cart model (see cartcontroller and product.php) -->
-                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
+                                {{-- <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a> --}}
+                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('storage/'.$item->model->image) }}" alt="item" class="cart-table-img"></a>
                                 <div class="cart-item-details">
                                     <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
                                     <div class="cart-table-description">{{ $item->model->details }}</div>
@@ -188,7 +189,7 @@
         /*invoking function*/-->
 @push('scripts')
 {{--see 
-    stack directive in layout.blade.pohp
+    stack directive in layout.blade.php
     https://laravel.com/docs/5.8/blade#stacks 
     https://stackoverflow.com/questions/55963663/laravel-custom-javascript-on-blade-is-not-working/55963744
 --}}
