@@ -44,7 +44,9 @@
                                 <!--the item object has a model property, the model in this case is Product which has been assocaited with 
                                     cart model (see cartcontroller and product.php) -->
                                 {{-- <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a> --}}
-                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('storage/'.$item->model->image) }}" alt="item" class="cart-table-img"></a>
+                                {{-- <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('storage/'.$item->model->image) }}" alt="item" class="cart-table-img"></a> --}}
+                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ productImage($item->model->image) }}" alt="item" class="cart-table-img"></a>
+                                <!--see helpers file for definition of productImage-->
                                 <div class="cart-item-details">
                                     <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
                                     <div class="cart-table-description">{{ $item->model->details }}</div>
@@ -138,7 +140,9 @@
                     @foreach (Cart::instance('saveForLater')->content() as $item)
                         <div class="cart-table-row">
                             <div class="cart-table-row-left">
-                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
+                                {{-- <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('images/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a> --}}
+                                <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ productImage($item->model->image) }}" alt="item" class="cart-table-img"></a>
+                                <!--see helpers file for definition of productImage-->
                                 <div class="cart-item-details">
                                     <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
                                     <div class="cart-table-description">{{ $item->model->details }}</div>

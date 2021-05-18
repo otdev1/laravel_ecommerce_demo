@@ -53,7 +53,9 @@
     <div class="product-section container">
         <div>
             <div class="product-section-image">
-                <img src="{{ asset('storage/'.$product->image) }}" alt="product" class="active" id="currentImage">
+                <img src="{{ productImage($product->image) }}" alt="product" class="active" id="currentImage">
+                <!--see helpers file for definition of productImage-->
+                {{--<img src="{{ asset('storage/'.$product->image) }}" alt="product" class="active" id="currentImage">--}}
                 <!--storage/app/public/products-->
                 {{--<img src="{{ asset('images/products/'.$product->slug.'.jpg') }}" alt="product" class="active" id="currentImage">--}}
                 <!--the slug and the image name of each product is the same-->

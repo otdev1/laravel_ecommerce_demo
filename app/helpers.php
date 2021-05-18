@@ -15,4 +15,10 @@
         return request()->category == $category ? $output : '';
     }
 
+    function productImage($path)
+    {
+        return $path && file_exists('storage/'.$path) ? asset('storage/'.$path) : asset('images/no-image.jpg');
+        //if the path to the image is in the products table and the image file exists display it else display no-image.jpg
+    }
+
 ?>

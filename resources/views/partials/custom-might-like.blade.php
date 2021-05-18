@@ -7,7 +7,9 @@
                 <a href="{{ route('shop.show', $product->slug) }}" class="might-like-product">
                     <!-- <img src="{{-- productImage($product->image) --}}" alt="product"> -->
                     {{-- <img src="{{ asset('images/products/'.$product->slug.'.jpg') }}" alt="product"> --}}
-                    <img src="{{ asset('storage/'.$product->image) }}" alt="product">
+                    {{-- <img src="{{ asset('storage/'.$product->image) }}" alt="product"> --}}
+                    <img src="{{ productImage($product->image) }}" alt="product">
+                    <!--see helpers file for definition of productImage-->
                     <div class="might-like-product-name">{{ $product->name }}</div>
                     <div class="might-like-product-price">{{ $product->presentPrice() }}</div>
                 </a>

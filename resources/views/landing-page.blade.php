@@ -79,7 +79,9 @@
                         @foreach ($products as $product)
                             <div class="product">
                                 {{--<a href="{{ route('shop.show', $product->slug) }}"><img src="images/macbook-pro.png" alt="product"></a>--}}
-                                <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('storage/'.$product->image) }}" alt="product"></a>
+                                {{-- <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('storage/'.$product->image) }}" alt="product"></a> --}}
+                                <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ productImage($product->image) }}" alt="product"></a>
+                                <!--see helpers file for definition of productImage-->
                                 <!--the slug and the image name of each product is the same-->
                                 <!--<a href="#"><div class="product-name">{{--$product->name--}}</div></a>-->
                                 <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
@@ -106,7 +108,7 @@
 
                     <div class="blog-posts">
                         <div class="blog-post" id="blog1">
-                            <a href="#"><img src="img/blog1.png" alt="blog image"></a>
+                            <a href="#"><img src="images/blog1.png" alt="blog image"></a>
                             <a href="#"><h2 class="blog-title">Blog Post Title 1</h2></a>
                             <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est ullam, ipsa quasi?</div>
                         </div>
