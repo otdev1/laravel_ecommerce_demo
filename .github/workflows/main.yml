@@ -32,7 +32,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/var/www/mywebsite"
+        target: "/laravel-ecommerce-demo.otwebdevelopment.net"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
