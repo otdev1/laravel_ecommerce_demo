@@ -1,9 +1,24 @@
 <ul>
     @foreach($items as $menu_item)
-        {{--voyager menu item--}} 
+        {{--voyager menu item--}}
+
         <li>
+            @if ($menu_item->title === 'Cart')
+                {{-- the cart menu item (voyager main menu) is prevented from being displayed --}}
+            @else
+                <a href="{{ $menu_item->link() }}">
+                    
+                    {{ $menu_item->title }}
+                    
+                </a>
+            @endif
+        </li> 
+
+        {{--<li>
             <a href="{{ $menu_item->link() }}">
+                
                 {{ $menu_item->title }}
+
                 @if ($menu_item->title === 'Cart')
                     <!--show cart item count badge if cart is not empty -->
                     @if (Cart::instance('default')->count() > 0)
@@ -13,7 +28,8 @@
                     @endif
                 @endif
             </a>
-        </li>
+        </li>--}}
+        
     @endforeach
 </ul>
 

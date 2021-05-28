@@ -62,16 +62,18 @@
             </div>
             <div class="product-section-images">
                 <div class="product-section-thumbnail selected">
-                    <img src="" alt="product">
+                    <img src="{{ productImage($product->image) }}" alt="product">
                 </div>
 
-                {{--@if ($product->images)
+                @if ($product->images)
                     @foreach (json_decode($product->images, true) as $image)
+                    {{--since $product->images is stored as a text string in products tables
+                    the json_decode function is used to convert it to an array--}}
                     <div class="product-section-thumbnail">
                         <img src="{{ productImage($image) }}" alt="product">
                     </div>
                     @endforeach
-                @endif--}}
+                @endif
             </div>
         </div>
         <div class="product-section-information">
@@ -79,7 +81,7 @@
             <div class="product-section-subtitle">{{ $product->details }}</div>
             <div>{{--!! $stockLevel !!--}}</div>
             <div class="product-section-price">{{ $product->presentPrice() }}</div>
-
+               {{--see helpers.php for definition of presentPrice()--}}
             <p>
                 {{-- $product->description --}}
                 {!! $product->description !!}
@@ -125,10 +127,12 @@
 @endsection
 
 @section('extra-js')
+    {{--javascript for changing main product image when a thubnail is clicked on--}}
     <script>
         (function(){
             const currentImage = document.querySelector('#currentImage');
             const images = document.querySelectorAll('.product-section-thumbnail');
+            /*get all of the thumbnails */
 
             images.forEach((element) => element.addEventListener('click', thumbnailClick));
 
@@ -137,6 +141,9 @@
 
                 currentImage.addEventListener('transitionend', () => {
                     currentImage.src = this.querySelector('img').src;
+                    /*change the source attribute of currentImage i.e main product image
+                    to the source attribute of the thumbnail that was clicked on*/
+
                     currentImage.classList.add('active');
                 })
 
