@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+//see vendor\laravel\ui\auth-backend
 
 class LoginController extends Controller
 {
@@ -19,16 +20,18 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers; //use the authenticateusers trait
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
-    //protected $redirectTo = '/';
+    protected $redirectTo = '/';
+
+    //protected $redirectTo = request()->URL();
 
     /**
      * Create a new controller instance.
@@ -39,4 +42,43 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm() //overrides showLoginForm function in authenticatesusers.php
+    {
+        session()->put('previousUrl', url()->previous());
+        /*store the URL of the previous page (value) in the key 'previousUrl'
+          see https://laravel.com/docs/8.x/session#storing-data
+          url()->previous() gets the full URL for the previous request 
+          see https://laravel.com/docs/8.x/urls#accessing-the-current-url
+          */
+
+        return view('auth.login');
+    }
+
+    public function redirectTo()
+    {
+        //dd(session()->get('previousUrl'));
+        return str_replace(url('/'), '', session()->get('previousUrl', '/'));
+        /* str_replace(find, replace, string, count)
+           find	 Required. Specifies the value to find
+           replace	Required. Specifies the value to replace the value in find
+           string	Required. Specifies the string to be searched
+           count	Optional. A variable that counts the number of replacements
+
+           url('/') generates the base URL 
+           see https://laravel.com/docs/8.x/urls#generating-urls
+        
+           session()->get('key', 'default')
+           retrieve the value stored in key
+           the default value returned if the specified key does not exist in the session 
+        */
+
+           
+    }
+
 }

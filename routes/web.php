@@ -12,7 +12,9 @@ use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\SaveForLaterController;
 
-use App\Http\Controllers\ImageRemoverController;
+use App\Http\Controllers\CheckoutController;
+
+//use App\Http\Controllers\ImageRemoverController;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -77,7 +79,9 @@ Route::delete('/saveForLater/{product}', [SaveForLaterController::class, 'destro
 
 Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::class, 'switchToCart'] )->name('saveForLater.switchToCart');
 
-Route::get('/removeproductimage/delete_value/{id}', [ImageRemoverController::class, 'delete_value'])->name('admin.productimageremoval.delete_value');
+//Route::get('/removeproductimage/delete_value/{id}', [ImageRemoverController::class, 'delete_value'])->name('admin.productimageremoval.delete_value');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 
 Route::get('empty', function() {
   Cart::instance('saveForLater')->destroy();

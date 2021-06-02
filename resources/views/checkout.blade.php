@@ -38,8 +38,11 @@
         <h1 class="checkout-heading stylish-heading">Checkout</h1>
         <div class="checkout-section">
             <div>
-                <form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
-                    {{ csrf_field() }}
+                {{-- <form action="{{ route('checkout.store') }}" method="POST" id="payment-form"> --}}
+                <form action="#" method="POST" id="payment-form">
+                    {{-- csrf_field() --}}
+                    @csrf
+
                     <h2>Billing Details</h2>
 
                     <div class="form-group">
@@ -108,7 +111,7 @@
 
                 </form>
 
-                @if ($paypalToken)
+                {{-- @if ($paypalToken)
                     <div class="mt-32">or</div>
                     <div class="mt-32">
                         <h2>Pay with PayPal</h2>
@@ -125,7 +128,7 @@
                             <button class="button-primary" type="submit"><span>Pay with PayPal</span></button>
                         </form>
                     </div>
-                @endif
+                @endif --}}
             </div>
 
 
@@ -156,26 +159,26 @@
                 <div class="checkout-totals">
                     <div class="checkout-totals-left">
                         Subtotal <br>
-                        @if (session()->has('coupon'))
+                        {{-- @if (session()->has('coupon'))
                             Discount ({{ session()->get('coupon')['name'] }}) :
                             <br>
                             <hr>
                             New Subtotal <br>
                         @endif
-                        Tax ({{config('cart.tax')}}%)<br>
+                        Tax ({{config('cart.tax')}}%) --}} <br>
                         <span class="checkout-totals-total">Total</span>
 
                     </div>
 
                     <div class="checkout-totals-right">
                         {{ presentPrice(Cart::subtotal()) }} <br>
-                        @if (session()->has('coupon'))
+                        {{-- @if (session()->has('coupon'))
                             -{{ presentPrice($discount) }} <br>
                             <hr>
                             {{ presentPrice($newSubtotal) }} <br>
                         @endif
-                        {{ presentPrice($newTax) }} <br>
-                        <span class="checkout-totals-total">{{ presentPrice($newTotal) }}</span>
+                        {{ presentPrice($newTax) }} --}} <br>
+                        <span class="checkout-totals-total">{{-- presentPrice($newTotal) --}}</span>
 
                     </div>
                 </div> <!-- end checkout-totals -->
@@ -281,7 +284,7 @@
 
             // PayPal Stuff
             var form = document.querySelector('#paypal-payment-form');
-            var client_token = "{{ $paypalToken }}";
+            var client_token = "{{-- $paypalToken --}}";
 
             braintree.dropin.create({
               authorization: client_token,

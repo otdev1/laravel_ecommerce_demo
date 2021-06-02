@@ -5,7 +5,7 @@
     @else
         {{--<li>
             <a href="{{ route('users.edit') }}">My Account</a>
-        </li>
+        </li>--}}
         <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -15,9 +15,9 @@
         </li>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
+            {{-- csrf_field() --}}
+            @csrf
         </form>
-        --}}
     @endguest
     <li><a href="{{ route('cart.index') }}">Cart
         @if (Cart::instance('default')->count() > 0)
