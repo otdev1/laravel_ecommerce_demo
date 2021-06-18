@@ -1,24 +1,24 @@
 
-    <article>
-    I built this website http://laravelpmanager.otwebdevelopment.net for the sole purpose of practising and showcasing my skills in Laravel development. Its functionality mimics 
-    that of an online business directory and implements the conventional CRUD (Create, Read, Update, Delete) operations on three database entities namely Companies, Roles and 
-    Users. Among these entities various types of relationships such as one to many and many to one exist. On the site users can:
+<article>
+I built this website http://laravelpmanager.otwebdevelopment.net for the sole purpose of practising and showcasing my skills in Laravel development. Its functionality mimics 
+that of an online business directory and implements the conventional CRUD (Create, Read, Update, Delete) operations on three database entities namely Companies, Roles and 
+Users. Among these entities various types of relationships such as one to many and many to one exist. On the site users can:
 
-    -	view, create, edit, or delete a single business profile
+-	view, create, edit, or delete a single business profile
 
-    -	view a list of all business profiles or those belonging to a specific user
+-	view a list of all business profiles or those belonging to a specific user
 
-    -	search for a specific company
+-	search for a specific company
 
-    -	view roles and the users that are assigned to a specific role
+-	view roles and the users that are assigned to a specific role
 
-    -	register as a new user
+-	register as a new user
 
-    -	log in with registration credentials or as a guest admin
+-	log in with registration credentials or as a guest admin
 
-    -	view or edit a user’s profile
+-	view or edit a user’s profile
 
-    -	search for a specific user
+-	search for a specific user
 
 Some other noteworthy details of the website are that the search functionality was implemented using Typeahead.js and the Bloodhound suggestion engine and the front-end was 
 built using the Blade template engine. User registration and log in is powered by Laravel’s built in authentication component. The website is also mobile device friendly.
