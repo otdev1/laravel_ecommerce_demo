@@ -1,29 +1,4 @@
 
-<article>
-The functionality of this website ( http://laravelpmanager.otwebdevelopment.net ) mimics that of an online business directory and implements the conventional CRUD (Create, Read, Update, Delete) operations on three database entities namely Companies, Roles and Users. Among these entities, various types of relationships such as one to many and many to one exist. On this site users can:
-
--	view, create, edit, or delete a single business profile
-
--	view a list of all business profiles or those belonging to a specific user
-
--	search for a specific company
-
--	view roles and the users that are assigned to a specific role
-
--	register as a new user
-
--	log in with registration credentials or as a guest admin
-
--	view or edit a user’s profile
-
--	search for a specific user
-
-Some other noteworthy details are that the search functionality was implemented using Typeahead.js and the Bloodhound suggestion engine. The front-end was 
-built using the Blade template engine and user registration and log-in is powered by Laravel’s built in authentication component. This website is also mobile device friendly.
-</article>
-
-##
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
