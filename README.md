@@ -19,7 +19,7 @@ The functionality of this website ( http://laravelpmanager.otwebdevelopment.net 
 -	search for a specific user
 
 Some other noteworthy details are that the search functionality was implemented using Typeahead.js and the Bloodhound suggestion engine. The front-end was 
-built using the Blade template engine and user registration and log in is powered by Laravel’s built in authentication component. This website is also mobile device friendly.
+built using the Blade template engine and user registration and log-in is powered by Laravel’s built in authentication component. This website is also mobile device friendly.
 </article>
 
 ##
