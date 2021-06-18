@@ -1,8 +1,6 @@
 
 <article>
-I built this website http://laravelpmanager.otwebdevelopment.net for the sole purpose of practising and showcasing my skills in Laravel development. Its functionality mimics 
-that of an online business directory and implements the conventional CRUD (Create, Read, Update, Delete) operations on three database entities namely Companies, Roles and 
-Users. Among these entities various types of relationships such as one to many and many to one exist. On the site users can:
+The functionality of this website ( http://laravelpmanager.otwebdevelopment.net ) mimics that of an online business directory and implements the conventional CRUD (Create, Read, Update, Delete) operations on three database entities namely Companies, Roles and Users. Among these entities, various types of relationships such as one to many and many to one exist. On this site users can:
 
 -	view, create, edit, or delete a single business profile
 
