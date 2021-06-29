@@ -55,7 +55,7 @@ class CartController extends Controller
             ->associate('App\Models\Product');
         // Cart::add($request->id, $request->name, 1, $request->price)
         //     ->associate('App\Product');
-        //add(productid, productname, productquantity, productprice, productweight)
+        //add(productid, productname, productquantity, productprice, productweight(optional))
         /*associate enables easier retrieval of the product model e.g $item->model->*field_of_product_model*
           in other sectons/files throughout the application see cart.blade.php and Product.php*/
 

@@ -81,7 +81,9 @@ Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::cla
 
 //Route::get('/removeproductimage/delete_value/{id}', [ImageRemoverController::class, 'delete_value'])->name('admin.productimageremoval.delete_value');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
+//Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Route::get('empty', function() {
   Cart::instance('saveForLater')->destroy();
@@ -93,3 +95,5 @@ Route::get('empty', function() {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/pp-checkout', function () { return view('pp-checkout'); } );

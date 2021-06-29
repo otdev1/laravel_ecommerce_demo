@@ -23,6 +23,8 @@
         "laravel/ui": "3.0",
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.0",
+        "paypal/paypal-checkout-sdk": "1.0.1",
+        "paypal/rest-api-sdk-php": "*",
         "tcg/voyager": "^1.4"
     },
     "require-dev": {
