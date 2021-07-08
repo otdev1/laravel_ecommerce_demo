@@ -88,18 +88,21 @@
         <script>
 
             //see https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction-authorize/#on-the-client
-            
             paypal.Buttons({
-                createOrder: function() {
+
+                // Call the server to set up the transaction
+                createOrder: function(data, actions) {
+                    var _token = "{{ csrf_token() }}";
                     return fetch('/api/create-payment', {
                         method: 'post',
                         headers: {
-                        'content-type': 'application/json'
+                            'X-CSRF-TOKEN': _token,
+                            'content-type': 'application/json'
                         }
                     }).then(function(res) {
                         return res.json();
                     }).then(function(data) {
-                        return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
+                        return data.result.id; // Use the key sent by your server's response, ex. 'id' or 'token'
                     });
                     /*return fetch('/api/create-payment/', {
                         method: 'post',
@@ -116,7 +119,47 @@
                         'content-type': 'application/json'
                         }
                     });*/
+                },
+
+                // Call your server to finalize the transaction
+                onApprove: function(data, actions) {
+                    var _token = "{{ csrf_token() }}";
+                    return fetch('/api/execute-payment/' + data.orderID , {
+                        method: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': _token,
+                            'Content-Type': 'application/json',
+                        },
+                    }).then(function(res) {
+                        return res.json();
+                    }).then(function(orderData) {
+                        // Three cases to handle:
+                        //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                        //   (2) Other non-recoverable errors -> Show a failure message
+                        //   (3) Successful transaction -> Show a success / thank you message
+                        // Your server defines the structure of 'orderData', which may differ
+                        var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+
+                        if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                            // Recoverable state, see: "Handle Funding Failures"
+                            // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                            return actions.restart();
+                        }
+
+                        if (errorDetail) {
+                            var msg = 'Sorry, your transaction could not be processed.';
+                            if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+                            if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
+                            // Show a failure message
+                            return alert(msg);
+                        }
+
+                        // Show a success message to the buyer
+                        alert('Transaction completed by ' + orderData.result.payer.name.given_name);
+                    });
                 }
+
+
             }).render('#paypal-button-container');
             // This function displays Smart Payment Buttons on your web page.
         </script>
