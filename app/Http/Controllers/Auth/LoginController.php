@@ -57,7 +57,8 @@ class LoginController extends Controller
           see https://laravel.com/docs/8.x/urls#accessing-the-current-url
           */
 
-        return view('auth.login');
+        //return view('auth.login');
+        return view('auth.custom-login');
     }
 
     public function redirectTo()

@@ -90,6 +90,11 @@
             //see https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction-authorize/#on-the-client
             paypal.Buttons({
 
+                //hides/removes the black debit or credit card button
+                /*style: {
+                    layout: 'horizontal',
+                    tagline: 'false',
+                },*/
                 // Call the server to set up the transaction
                 createOrder: function(data, actions) {
                     var _token = "{{ csrf_token() }}";

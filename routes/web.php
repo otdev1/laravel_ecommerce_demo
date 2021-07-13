@@ -14,6 +14,8 @@ use App\Http\Controllers\SaveForLaterController;
 
 use App\Http\Controllers\CheckoutController;
 
+use App\Http\Controllers\ConfirmationController;
+
 //use App\Http\Controllers\ImageRemoverController;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -90,6 +92,8 @@ Route::get('empty', function() {
 });
 
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route
+
+Route::get('/thankyou', [ConfirmationController::class, 'index'])->name('confirmation.index');
 
 
 Route::group(['prefix' => 'admin'], function () {
