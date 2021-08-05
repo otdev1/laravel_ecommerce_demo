@@ -16,7 +16,9 @@ use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\ConfirmationController;
 
-//use App\Http\Controllers\ImageRemoverController;
+//use App\Http\Controllers\ImageRemoverController; see https://github.com/the-control-group/voyager/issues/1160
+
+use App\Http\Controllers\Auth\LoginController;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -85,7 +87,8 @@ Route::post('/saveForLater/switchToCart/{product}', [SaveForLaterController::cla
 
 //Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
+//middleware('auth') enforces that a user must be logged in before redirected to checkout page
 
 Route::get('empty', function() {
   Cart::instance('saveForLater')->destroy();
@@ -94,6 +97,8 @@ Route::get('empty', function() {
 //Route::view('/shop', 'shop'); //show the view called shop for the /shop route
 
 Route::get('/thankyou', [ConfirmationController::class, 'index'])->name('confirmation.index');
+
+//Route::get('/admin/login', [LoginController::class, 'CustomRedirectTo']);
 
 
 Route::group(['prefix' => 'admin'], function () {

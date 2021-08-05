@@ -22,7 +22,9 @@
             <h2>Reset Password</h2>
             <div class="spacer"></div>
             <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
-                {{ csrf_field() }}
+                {{-- csrf_field() --}}
+
+                @csrf
 
                 <input type="hidden" name="token" value="{{ $token }}">
 

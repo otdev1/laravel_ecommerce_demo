@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 //see vendor\laravel\ui\auth-backend
+use Illuminate\Http\Request; //see https://laravel.com/docs/8.x/requests
 
 class LoginController extends Controller
 {
@@ -41,6 +42,8 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+        //$this->middleware('auth')->except('ForcedRedirectTo');
     }
 
     /**
@@ -64,6 +67,10 @@ class LoginController extends Controller
     public function redirectTo()
     {
         //dd(session()->get('previousUrl'));
+        /*code condition to make exception for redirection when route is admin/login*/
+        //$current_uri = $request->path();
+        /* see https://laravel.com/docs/8.x/requests#retrieving-the-request-path */
+
         return str_replace(url('/'), '', session()->get('previousUrl', '/'));
         /* str_replace(find, replace, string, count)
            find	 Required. Specifies the value to find
@@ -78,8 +85,53 @@ class LoginController extends Controller
            retrieve the value stored in key
            the default value returned if the specified key does not exist in the session 
         */
+        /*if( $current_uri != 'admin/login')
+        {
+            return str_replace(url('/'), '', session()->get('previousUrl', '/'));
+            /* str_replace(find, replace, string, count)
+            find	 Required. Specifies the value to find
+            replace	Required. Specifies the value to replace the value in find
+            string	Required. Specifies the string to be searched
+            count	Optional. A variable that counts the number of replacements
 
-           
+            url('/') generates the base URL 
+            see https://laravel.com/docs/8.x/urls#generating-urls
+            
+            session()->get('key', 'default')
+            retrieve the value stored in key
+            the default value returned if the specified key does not exist in the session 
+            */
+        //}
     }
+
+    /*public function CustomRedirectTo(Request $request)
+    {
+
+        //session()->flash('success', 'Registration successful'); 
+        // return '/companies';
+        $current_uri = $request->path();
+
+        if( $current_uri != 'admin/login')
+        {
+            //dd($current_uri);
+
+            return str_replace(url('/'), '', session()->get('previousUrl', '/'));
+            /* str_replace(find, replace, string, count)
+            find	 Required. Specifies the value to find
+            replace	Required. Specifies the value to replace the value in find
+            string	Required. Specifies the string to be searched
+            count	Optional. A variable that counts the number of replacements
+
+            url('/') generates the base URL 
+            see https://laravel.com/docs/8.x/urls#generating-urls
+            
+            session()->get('key', 'default')
+            retrieve the value stored in key
+            the default value returned if the specified key does not exist in the session 
+            */
+        //}
+
+        //return '/admin/login';
+    //}
 
 }

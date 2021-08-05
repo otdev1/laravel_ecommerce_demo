@@ -70,4 +70,25 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function redirectTo()
+    {
+        //dd(session()->get('previousUrl'));
+        return str_replace(url('/'), '', session()->get('previousUrl', '/'));
+        /* str_replace(find, replace, string, count)
+           find	 Required. Specifies the value to find
+           replace	Required. Specifies the value to replace the value in find
+           string	Required. Specifies the string to be searched
+           count	Optional. A variable that counts the number of replacements
+
+           url('/') generates the base URL 
+           see https://laravel.com/docs/8.x/urls#generating-urls
+        
+           session()->get('key', 'default')
+           retrieve the value stored in key
+           the default value returned if the specified key does not exist in the session 
+        */
+
+           
+    }
 }
