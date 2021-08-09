@@ -1,3 +1,12 @@
+{{-- this is a custom version of vendor\tcg\voyager\resources\views\bread\edit-add.blade.php
+     it is used by ProductsController
+     refer to 
+     vendor\tcg\voyager\resources\views\posts\edit-add.blade.php
+     http://127.0.0.1:8000/admin/posts/create 
+     http://127.0.0.1:8000/admin/posts/1/edit 
+     for guidelines on how to further customize this view
+--}}
+
 @php
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
@@ -98,7 +107,14 @@
                                         {{--see edit function of http\controllers\voyager\productscontrollers for definition of 
                                             allcategories--}}
                                         {{-- <li><label><input value="{{ $category->id }}" type="checkbox" name="category[]" style="margin-right: 5px;" {{ $categoriesForProduct->contains($category) ? 'checked' : '' }}>{{ $category->name }}</label></li> --}}
-                                        <li><label><input value="{{ $category->id }}" type="checkbox" name="category[]" style="margin-right: 5px;" >{{ $category->name }}</label></li>
+                                        <li><label><input value="{{ $category->id }}" type="checkbox" name="category[]" style="margin-right: 5px;" {{ $categoriesForProduct->contains($category) ? 'checked' : '' }}>{{ $category->name }}</label></li>
+                                        
+                                        {{-- $categoriesForProduct->contains($category) ? 'checked' : ''
+                                             if the category(categories) that the product currently being editted is assigned to is
+                                             contained in the categoriesForProduct array(collection) display the checkbox as checked
+                                             see ProductsController for definition of categoriesForProduct
+                                        --}}
+                                    
                                     @endforeach
                                 </ul>
                             </div> <!-- end form-group -->
@@ -225,6 +241,11 @@
                 $('#confirm_delete_modal').modal('hide');
             });
             $('[data-toggle="tooltip"]').tooltip();
+
+            /*store and update functions inProductsController */
+            var price = $('input[name="price"').val();
+            $('input[name="price"').val(price / 100);
+
         });
     </script>
 @stop
